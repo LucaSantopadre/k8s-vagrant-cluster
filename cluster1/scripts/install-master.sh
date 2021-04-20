@@ -16,4 +16,8 @@ cp /vagrant/certs/id_rsa.pub /root/.ssh/id_rsa.pub
 chmod 400 /root/.ssh/id_rsa
 chmod 400 /root/.ssh/id_rsa.pub
 
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+# CLOUD-WEAVE
+# kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+# FLANNEL
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
