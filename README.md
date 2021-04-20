@@ -1,18 +1,18 @@
 # Kubernetes cluster using vagrant
 
-## prerequisites
+## Prerequisites
  - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
  - [Vagrant](https://www.vagrantup.com/downloads)
 
 
-## setup and run
+## Setup and run
 
-You will start a three node cluster, one master and two worker. 
+You will start a 3 node kubernetes cluster:  one master and two worker.
 
- - cluster1-master1
- - cluster1-worker1
- - cluster1-worker2
-
+The cluster environment is based on *k8s* cluster provided by [CKA specifications](https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#cka-and-ckad-environment).
+ - Kubernetes v1.20
+ - Docker (CRI)
+ - Flannel (CNI)
 
 ```
 git clone https://github.com/LucaSantopadre/k8s-vagrant-cluster.git
