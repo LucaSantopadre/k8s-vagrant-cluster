@@ -3,9 +3,11 @@ IP_WORKER1 = "192.168.101.201"
 IP_WORKER2 = "192.168.101.202"
 
 POD_NW_CIDR = "10.244.0.0/16"
+SVC_NW_CIDR = "10.96.0.0/12"
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/bionic64"
+  #config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "ubuntu/focal64"
   config.vm.box_check_update = false
 
   ### CLUSTER1-MASTER1
@@ -32,7 +34,7 @@ Vagrant.configure("2") do |config|
     node.vm.provision 'shell', inline: "cat /vagrant/certs/id_rsa.pub >> /root/.ssh/authorized_keys"
     node.vm.provision "update-dns", type: "shell", :path => "scripts/update-dns.sh"
     node.vm.provision "install-kube", type: "shell", :path => "scripts/install-kube.sh"
-    node.vm.provision "install-master", type: "shell", :path => "scripts/install-master.sh", env: {"MASTER_IP" => "#{IP_MASTER1}", "POD_NW_CIDR" => "#{POD_NW_CIDR}"}
+    node.vm.provision "install-master", type: "shell", :path => "scripts/install-master.sh", env: {"MASTER_IP" => "#{IP_MASTER1}", "POD_NW_CIDR" => "#{POD_NW_CIDR}", "SVC_NW_CIDR" => "#{SVC_NW_CIDR}"}
   end
   ### END CLUSTER1-MASTER!
     
@@ -64,7 +66,7 @@ Vagrant.configure("2") do |config|
   end
   ### END CLUSTER1-WORKER1
 
-  ### CLUSTER1-WORKER2
+  ## CLUSTER1-WORKER2
   config.vm.define "cluster1-worker2" do |node|
 
     node.vm.provider "virtualbox" do |vb|
@@ -90,5 +92,5 @@ Vagrant.configure("2") do |config|
     node.vm.provision "install-kube", type: "shell", :path => "scripts/install-kube.sh"
     node.vm.provision "install-worker", type: "shell", :path => "scripts/install-worker.sh", env: {"MASTER_IP" => "#{IP_MASTER1}"}
   end
-  ### END CLUSTER1-WORKER2
+  ## END CLUSTER1-WORKER2
 end

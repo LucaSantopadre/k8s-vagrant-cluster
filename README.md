@@ -12,7 +12,7 @@ You will start a 3 node kubernetes cluster:  one master and two worker.
 The cluster environment is based on *k8s* cluster provided by [CKA specifications](https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#cka-and-ckad-environment).
  - Kubernetes v1.20
  - Docker (CRI)
- - Flannel (CNI)
+ - Weave (CNI)
 
 ```
 git clone https://github.com/LucaSantopadre/k8s-vagrant-cluster.git

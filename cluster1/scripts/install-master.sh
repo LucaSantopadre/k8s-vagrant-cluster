@@ -3,7 +3,7 @@ apt-get update
 apt-get install -y etcd-client
 
 kubeadm reset -f
-kubeadm init --kubernetes-version=1.20.0 --apiserver-advertise-address=$MASTER_IP --pod-network-cidr=$POD_NW_CIDR
+kubeadm init --kubernetes-version=1.20.0 --apiserver-advertise-address=$MASTER_IP --pod-network-cidr=$POD_NW_CIDR --service-cidr=$SVC_NW_CIDR
 kubeadm token create --print-join-command --ttl 0 > /vagrant/tmp/master-join-command.sh
 
 mkdir -p $HOME/.kube
@@ -17,7 +17,7 @@ chmod 400 /root/.ssh/id_rsa
 chmod 400 /root/.ssh/id_rsa.pub
 
 # CLOUD-WEAVE
-# kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 # FLANNEL
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+#kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
