@@ -1,0 +1,32 @@
+---
+# install nginx ingress-controller
+# https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: ing-nginx
+  namespace: default
+spec:
+  rules:
+  - host: webone.com
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: webone-svc
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+  - host: webtwo.org
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: webtwo-svc
+            port:
+              number: 80
+        pathType: ImplementationSpecific

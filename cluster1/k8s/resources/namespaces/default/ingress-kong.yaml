@@ -1,0 +1,32 @@
+---
+# install kong ingress-controller
+# kubectl create -f https://bit.ly/k4k8s
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: kong
+  name: ing-kong
+  namespace: default
+spec:
+  rules:
+  - host: webone.com
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: webone-svc
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+  - host: webtwo.org
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: webtwo-svc
+            port:
+              number: 80
+        pathType: ImplementationSpecific
